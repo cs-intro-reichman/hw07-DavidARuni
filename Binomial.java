@@ -19,9 +19,14 @@ public class Binomial {
 	
 	// Computes the Binomial function, efficiently
 	public static int binomial(int n, int k) {
-		//// This function creates a 2D array, say memo, 
-		//// and then initializes all its elements to -1.
-		//// It then calls binomial(n, k, memo), which does all the heavy lifiting.
+		// Invalid cases
+		if (k < 0 || k > n) return 0;
+
+		// Symmetry: C(n, k) = C(n, n-k)
+		if (k > n - k) {
+			k = n - k;
+		}
+
 		int[][] memo = new int[n + 1][k + 1];
 		for (int i = 0; i < memo.length; i++) {
 			for (int j = 0; j < memo[i].length; j++) {
@@ -32,23 +37,23 @@ public class Binomial {
 	}
 
 	private static int binomial(int n, int k, int[][] memo) {
+		// Guard against bad indices
+		if (k < 0 || k > n) return 0;
+
+		// Base cases
+		if (k == 0 || k == n) {
+			return 1;
+		}
+
+		// Already computed?
 		if (memo[n][k] != -1) {
 			return memo[n][k];
 		}
-		// Base case
-		if ((k > n)) {
-		   	memo[n][k] = 0; 
-		   	return 0;
-		}
-		// Another base case
-		if (n == 0 || k == 0) {
-		   	memo[n][k] = 1; 
-		   	return 1;
-		}
+
+		// Recurrence with memoization
 		memo[n][k] = binomial(n - 1, k, memo) + binomial(n - 1, k - 1, memo);
 		return memo[n][k];
 	}
+
 }
-
-
 
