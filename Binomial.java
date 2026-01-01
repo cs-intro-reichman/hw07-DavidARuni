@@ -7,7 +7,7 @@ public class Binomial {
     	// System.out.println(binomial1(Integer.parseInt(args[0]), Integer.parseInt(args[1])));
 
 		// Testing the optimized binomial implementation:
-		System.out.println(binomial(50, 25));
+		// System.out.println(binomial(50, 25));
 		// System.out.println(binomial(50, 25).getClass());
 	}
 
