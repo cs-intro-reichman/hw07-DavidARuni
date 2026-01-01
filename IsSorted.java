@@ -6,8 +6,16 @@ public class IsSorted {
     }
 
     // Helper recursive function
+    // The helper function should check whether the array is sorted starting from
+    // index i, and make a recursive call on a smaller subproblem.
     private static boolean isSorted(int[] a, int i) {
-        //// Replace the following statement with your code
+        if(a.length == 0 || a.length == 1){
+            return true;
+        } else if (i == a.length - 1) {
+            return true;
+        } else if (a[i] <= a[i+1]) {
+            return isSorted(a, i+1);
+        }
         return false; 
     }
 
