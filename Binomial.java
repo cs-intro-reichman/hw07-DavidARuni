@@ -7,7 +7,7 @@ public class Binomial {
     	// System.out.println(binomial1(Integer.parseInt(args[0]), Integer.parseInt(args[1])));
 
 		// Testing the optimized binomial implementation:
-		// System.out.println(binomial(50, 25));
+		System.out.println(binomial(50, 25));
 		// System.out.println(binomial(50, 25).getClass());
 	}
 
@@ -32,10 +32,11 @@ public class Binomial {
 	}
 
 	// Computes the Binomial function, efficiently
-	public static String binomial(int n, int k) {
+	// using Long for bigger numbers
+	public static long binomial(int n, int k) {
 		// Invalid cases
-		if (k < 0 || k > n) return "0";
-		if (k == 0 || n == 0) return "1";
+		if (k < 0 || k > n) return 0;
+		if (k == 0 || n == 0) return 1;
 		// Symmetry: C(n, k) = C(n, n-k)
 		if (k > n - k) {
 			k = n - k;
@@ -47,24 +48,23 @@ public class Binomial {
 	}
 
 
-	private static String binomial(int n, int k, long[][] memo) {
+	private static long binomial(int n, int k, long[][] memo) {
 		// Guard against bad indices
-		if (k < 0 || k > n) return "0";
+		if (k < 0 || k > n) return 0;
 
 		// Base cases
 		if (k == 0 || k == n) {
-			return "1";
+			return 1;
 		}
 
 		// Already computed?
 		if (memo[n][k] != -1) {
-			return ""+memo[n][k];
+			return memo[n][k];
 		}
 
 		// Recurrence with memoization
-		memo[n][k] = Long.parseLong(binomial(n - 1, k, memo)) + Long.parseLong(binomial(n - 1, k - 1, memo));
-		return ""+memo[n][k];
+		memo[n][k] = binomial(n - 1, k, memo) + binomial(n - 1, k - 1, memo);
+		return memo[n][k];
 	}
-
 }
 
